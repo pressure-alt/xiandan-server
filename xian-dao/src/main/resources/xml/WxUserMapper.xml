@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huang.dao.mapper.WxUserMapper">
+
+    <select id="getUserInfo" resultType="com.huang.dao.entity.WxUser" >
+        SELECT *
+        FROM `user`
+    </select>
+    <select id="getUsersDefaultAddressId" resultType="integer">
+        SELECT address_id
+        FROM `user`
+        WHERE user_id=#{#user_id}
+    </select>
+    <select id="getUsersAllAddress" resultType="com.huang.dao.entity.Address">
+        SELECT address.*
+        FROM `address`, `user`
+        WHERE address.user_id=user.user_id and address.user_id=#{user_id}
+
+
+    </select>
+</mapper>

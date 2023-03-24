@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xiandan?characterEncoding=utf-8
+    username: root
+    password: 123456
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+server:
+  port: 8088
+#mybatis??
+mybatis:
+  type-aliases-package: com.huang.entity
+  mapper-locations: classpath:xml/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+#xiandan程序配置
+xiandan:
+  resources:
+    picture:
+      picUrl: /api/images
+      path: D:\Xiandan\images\

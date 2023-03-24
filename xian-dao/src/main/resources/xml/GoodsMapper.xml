@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huang.dao.mapper.GoodsMapper">
+    <resultMap id="getRandomGoods" type="com.huang.dao.entity.Goods">
+        <id     property="gid"          column="gid"></id>
+        <result property="categoryId"   column="gid"/>
+        <result property="iconPath"     column="gicon_path"/>
+        <result property="prePrice"     column="gpre_price"/>
+        <result property="price"        column="gprice"/>
+        <result property="details"      column="gdetails"/>
+        <result property="ownerId"      column="ownerId"/>
+        <result property="fineness"     column="fineness"/>
+        <result property="location"     column="glocation"/>
+        <result property="time"         column="time"/>
+        <result property="categoryId"   column="category_id"/>
+        <result property="status"       column="gstatus"/>
+    </resultMap>
+    <select id="getRandomGoods" resultMap="getRandomGoods">
+        SELECT *
+        FROM `goods`
+        WHERE gstatus = 1
+        LIMIT #{page},10
+    </select>
+    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `goods` (gprofile, price, gicon_path, owner_id, category_id, glocation, gdetails, fineness)
+            value (#{profile},#{price},#{icon_Path},#{owner_id},#{category_id},#{location},#{details},#{fineness})
+    </insert>
+
+</mapper>
