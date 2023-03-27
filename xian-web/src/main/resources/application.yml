@@ -9,6 +9,11 @@ spring:
       matching-strategy: ant_path_matcher
 server:
   port: 8088
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
 #mybatis??
 mybatis:
   type-aliases-package: com.huang.entity
@@ -17,7 +22,10 @@ mybatis:
     map-underscore-to-camel-case: true
 #xiandan程序配置
 xiandan:
+  domain-name: http://localhost:8088
   resources:
     picture:
-      picUrl: /api/images
+      picUrl: /images/
       path: D:\Xiandan\images\
+  appid: "wx75f01b18b5b42af9"
+  secret: "da8dffbceb895b7080c4eaf2c2cb316e"

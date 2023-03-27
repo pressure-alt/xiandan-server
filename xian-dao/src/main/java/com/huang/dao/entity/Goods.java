@@ -2,22 +2,51 @@ package com.huang.dao.entity;
 
 import lombok.Data;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 public class Goods {
-    public long gid;    //			商品id
-    public String profile;    //商品简介
-    public double price;//	商品价格
-    public double prePrice;    //商品原价
-    public int categoryId;//商品分类
-    public String details;//商品详情
-    public int ownerId;//卖家id
-    public int stockNum;//库存数量
-    public String iconPath;//商品图片存储路径
-    public int status;    //商品是否上架(0未上架 1已上架)
-    public Date time; //上架时间
-    public String location;//商品所在地
-    public String fineness;//商品成色
+    /** 商品id */
+    private Long gid;
+
+    /** 商品简介 */
+    private String gprofile;
+
+    /** 商品价格 */
+    private BigDecimal gprice;
+
+    /** 商品原价 */
+    private BigDecimal gprePrice;
+
+    /** 商品图片存储路径 */
+    private String giconPath;
+
+    /** 商品详情 */
+    private String gdetails;
+
+    /** 卖家id */
+    private Long ownerId;
+
+    /** 位置 */
+    private String glocation;
+
+    /** 商品成色 */
+    private String fineness;
+
+    /** 商品库存 */
+    private Long stockNum;
+
+    /** 商品分类id */
+    private Long categoryId;
+
+    /** 商品是否上架(0未上架 1已上架) */
+    private Integer gstatus;
+
+    /** 发布时间 */
+    private java.util.Date time;
+
+
+
 
 }

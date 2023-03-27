@@ -3,9 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huang.dao.mapper.OrderMapper">
+    <insert id="insertOrder"></insert>
     <update id="setDeliveryNumber"></update>
+    <update id="updateOrder"></update>
+    <delete id="deleteOrderByOrderId"></delete>
+    <delete id="deleteOrderByOrderIds"></delete>
     <select id="getOrderListByUserId" resultType="com.huang.dao.entity.Order">
 
 
     </select>
+    <select id="selectOrderByOrderId" resultType="com.huang.dao.entity.Order"></select>
+    <select id="selectOrderList" resultType="com.huang.dao.entity.Order"></select>
 </mapper>

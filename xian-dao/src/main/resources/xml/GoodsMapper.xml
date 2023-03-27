@@ -4,28 +4,80 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huang.dao.mapper.GoodsMapper">
     <resultMap id="getRandomGoods" type="com.huang.dao.entity.Goods">
-        <id     property="gid"          column="gid"></id>
-        <result property="categoryId"   column="gid"/>
-        <result property="iconPath"     column="gicon_path"/>
-        <result property="prePrice"     column="gpre_price"/>
-        <result property="price"        column="gprice"/>
-        <result property="details"      column="gdetails"/>
-        <result property="ownerId"      column="ownerId"/>
-        <result property="fineness"     column="fineness"/>
-        <result property="location"     column="glocation"/>
-        <result property="time"         column="time"/>
-        <result property="categoryId"   column="category_id"/>
-        <result property="status"       column="gstatus"/>
+        <id property="gid" column="gid"></id>
+        <result property="categoryId" column="gid"/>
+        <result property="giconPath" column="gicon_path"/>
+        <result property="gprePrice" column="gpre_price"/>
+        <result property="gprice" column="gprice"/>
+        <result property="gdetails" column="gdetails"/>
+        <result property="ownerId" column="ownerId"/>
+        <result property="fineness" column="fineness"/>
+        <result property="glocation" column="glocation"/>
+        <result property="time" column="time"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="gstatus" column="gstatus"/>
     </resultMap>
+    <update id="updateGoods"></update>
+    <delete id="deleteGoodsByGids"></delete>
+    <delete id="deleteGoodsByGid">
+        DELETE
+        FROM `goods`
+        where gid = #{goodsId}
+    </delete>
     <select id="getRandomGoods" resultMap="getRandomGoods">
         SELECT *
         FROM `goods`
         WHERE gstatus = 1
-        LIMIT #{page},10
+            LIMIT #{page}
+            , 10
     </select>
-    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO `goods` (gprofile, price, gicon_path, owner_id, category_id, glocation, gdetails, fineness)
-            value (#{profile},#{price},#{icon_Path},#{owner_id},#{category_id},#{location},#{details},#{fineness})
+    <select id="selectGoodsByGid" resultType="com.huang.dao.entity.Goods"></select>
+    <select id="selectGoodsList" resultType="com.huang.dao.entity.Goods"></select>
+    <insert id="insertGoods" >
+                INSERT into `goods`(gid,gprofile, gprice,gpre_price ,gicon_path,gdetails,owner_id, glocation, fineness,stock_num, category_id , gstatus)
+                value (#{gid},#{gprofile}, #{gprice},#{gprePrice} ,#{giconPath},#{gdetails},#{ownerId}, #{glocation}, #{fineness},#{stockNum}, #{categoryId} , #{gstatus})
+        <selectKey keyProperty="gid" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+<!--        insert into goods-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="gprofile != null and gprofile != ''">gprofile,</if>-->
+<!--            <if test="gprice != null">gprice,</if>-->
+<!--            <if test="gprePrice != null">gpre_price,</if>-->
+<!--            <if test="giconPath != null and giconPath != ''">gicon_path,</if>-->
+<!--            <if test="gdetails != null and gdetails != ''">gdetails,</if>-->
+<!--            <if test="ownerId != null">owner_id,</if>-->
+<!--            <if test="glocation != null and glocation != ''">glocation,</if>-->
+<!--            <if test="fineness != null and fineness != ''">fineness,</if>-->
+<!--            <if test="stockNum != null">stock_num,</if>-->
+<!--            <if test="categoryId != null">category_id,</if>-->
+<!--            <if test="gstatus != null">gstatus,</if>-->
+<!--            <if test="time != null">time,</if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="gprofile != null and gprofile != ''">#{gprofile},</if>-->
+<!--            <if test="gprice != null">#{gprice},</if>-->
+<!--            <if test="gprePrice != null">#{gprePrice},</if>-->
+<!--            <if test="giconPath != null and giconPath != ''">#{giconPath},</if>-->
+<!--            <if test="gdetails != null and gdetails != ''">#{gdetails},</if>-->
+<!--            <if test="ownerId != null">#{ownerId},</if>-->
+<!--            <if test="glocation != null and glocation != ''">#{glocation},</if>-->
+<!--            <if test="fineness != null and fineness != ''">#{fineness},</if>-->
+<!--            <if test="stockNum != null">#{stockNum},</if>-->
+<!--            <if test="categoryId != null">#{categoryId},</if>-->
+<!--            <if test="gstatus != null">#{gstatus},</if>-->
+<!--            <if test="time != null">#{time},</if>-->
+
+<!--        </trim>-->
+
     </insert>
+    <!--    <insert id="insertGood" parameterType="com.huang.dao.entity.Goods">-->
+    <!--        INSERT into `goods`(gprofile, price,  owner_id, category_id, glocation, gdetails, fineness)-->
+    <!--        value (#{profile},#{price},#{owner_id},#{category_id},#{location},#{details},#{fineness})-->
+    <!--        <selectKey keyProperty="sid" order="AFTER" resultType="long">-->
+    <!--            SELECT LAST_INSERT_ID()-->
+    <!--        </selectKey>-->
+    <!--    </insert>-->
 
 </mapper>

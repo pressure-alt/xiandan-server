@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.huang.dao.mapper.AddressMapper" >
+    <insert id="insertAddress"></insert>
+    <update id="updateAddress"></update>
+    <delete id="deleteAddressByAddressId"></delete>
+    <delete id="deleteAddressByAddressIds"></delete>
 
     <select id="getAllAddressByUserId" resultType="com.huang.dao.entity.Address">
         select *
         from `address`
         where user_id=#{userId}
     </select>
+    <select id="selectAddressList" resultType="com.huang.dao.entity.Address"></select>
+    <select id="selectAddressByAddressId" resultType="com.huang.dao.entity.Address"></select>
 </mapper>

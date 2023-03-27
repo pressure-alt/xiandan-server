@@ -8,8 +8,11 @@ import java.util.List;
 
 public interface GoodsService {
 
-    List<Goods>goodList(int page);
-    boolean insertGoods();
+    List<Goods> goodList(int page);
 
-    boolean insertGoods(String profile, double price, int categoryId, String location, String details, String iconPath, int id, int num, String fineness);
+    int insertGoods(Goods goods);
+
+    int deleteGoods(long goodsId);
+
+    int updateGoods(Goods goods);
 }
