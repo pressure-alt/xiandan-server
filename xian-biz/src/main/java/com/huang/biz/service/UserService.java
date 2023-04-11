@@ -8,8 +8,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface UserService {
-    List<WxUser> getUserInfo();
-    List<Address>getUsersAllAddress(int id);
-    Integer getUserDefaultAddressId(int id);
-    void addUserAddress(JSONObject jsonObject);
+    /**
+     * 获取用户信息
+     * @param userId
+     * @return
+     */
+    WxUser getUserInfo(long userId);
+
+    List<WxUser>getUserInfoList(long[]userId);
+    /**
+     * 获取用户所有地址信息
+     * @param id
+     * @return
+     */
+    List<Address> getUsersAllAddress(long id);
+
+    /**
+     * 获取用户默认地址id
+     * @param id
+     * @return
+     */
+    Integer getUserDefaultAddressId(long id);
+
+    void addUserAddress(Address address);
+
+
 }

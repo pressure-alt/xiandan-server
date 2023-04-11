@@ -9,17 +9,15 @@ import java.util.List;
 
 @Mapper
 public interface GoodsMapper {
-    List<Goods>getRandomGoods(@Param("page")int page);
-//    boolean insertGoods(@Param("profile")String profile,
-//                        @Param("price")double price,
-//                        @Param("category_id")long categoryId,
-//                        @Param("location")String location,
-//                        @Param("details")String details,
-//                        @Param("owner_id")  long id,
-//                        @Param("stock_num") long num,
-//                        @Param("fineness")String fineness
-//                        );
-//    boolean insertGood(Goods goods);
+
+    /**
+     * 推荐商品
+     * @param param
+     * @return
+     */
+    List<Goods>getRandomGoods(int param,int pageSize);
+
+    List<Goods>selectGoodsByOwnerId(long ownerId);
     /**
      * 查询商品
      *
@@ -27,7 +25,8 @@ public interface GoodsMapper {
      * @return 商品
      */
     public Goods selectGoodsByGid(Long gid);
-
+    List<Goods> selectGoodsWithKeyWd(String keyWords);
+    List<Goods> selectGoodsWithCategoryId(Long categoryId);
     /**
      * 查询商品列表
      *
@@ -52,6 +51,7 @@ public interface GoodsMapper {
      */
     public int updateGoods(Goods goods);
 
+    int updateGoodsImages(long gid,String ImgURI);
     /**
      * 删除商品
      *
@@ -67,4 +67,5 @@ public interface GoodsMapper {
      * @return 结果
      */
     public int deleteGoodsByGids(String[] gids);
+
 }

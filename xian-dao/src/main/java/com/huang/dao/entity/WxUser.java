@@ -7,7 +7,7 @@ import lombok.Data;
 public class WxUser {
 
     /** 用户id */
-    private String userId;
+    private Long userId;
 
     /** 微信openid(唯一标示) */
     private String openId;

@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/xiandan?characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/xiandanpro?characterEncoding=utf-8
     username: root
     password: 123456
   mvc:
@@ -24,6 +24,8 @@ mybatis:
 xiandan:
   domain-name: http://localhost:8088
   resources:
+    page:
+      pageSize: 10
     picture:
       picUrl: /images/
       path: D:\Xiandan\images\

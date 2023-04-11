@@ -7,11 +7,12 @@
     <select id="getUserInfo" resultType="com.huang.dao.entity.WxUser" >
         SELECT *
         FROM `user`
+        WHERE user_id=#{userId}
     </select>
     <select id="getUsersDefaultAddressId" resultType="integer">
         SELECT address_id
         FROM `user`
-        WHERE user_id=#{#user_id}
+        WHERE user_id=#{user_id}
     </select>
     <select id="getUsersAllAddress" resultType="com.huang.dao.entity.Address">
         SELECT address.*
@@ -20,4 +21,5 @@
 
 
     </select>
+    <select id="getUserInfoList" resultType="com.huang.dao.entity.WxUser"></select>
 </mapper>
