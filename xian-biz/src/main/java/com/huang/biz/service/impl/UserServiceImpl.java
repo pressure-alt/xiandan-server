@@ -23,6 +23,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public WxUser getUserInfoByOpenId(String openId) {
+
+        return wxUserMapper.getUserInfoListByOpenId(openId);
+    }
+
+    @Override
     public List<WxUser> getUserInfoList(long[] userId) {
 
         return wxUserMapper.getUserInfoList(userId);

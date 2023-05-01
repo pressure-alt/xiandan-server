@@ -9,9 +9,13 @@
     <delete id="deleteOrderByOrderId"></delete>
     <delete id="deleteOrderByOrderIds"></delete>
     <select id="getOrderListByUserId" resultType="com.huang.dao.entity.Order">
-
+    select *
+    from `order`
+    where buyer_id=#{id}
 
     </select>
     <select id="selectOrderByOrderId" resultType="com.huang.dao.entity.Order"></select>
-    <select id="selectOrderList" resultType="com.huang.dao.entity.Order"></select>
+    <select id="selectOrderList" resultType="com.huang.dao.entity.Order">
+
+    </select>
 </mapper>

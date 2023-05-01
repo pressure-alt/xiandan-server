@@ -15,6 +15,7 @@ public interface UserService {
      */
     WxUser getUserInfo(long userId);
 
+    WxUser getUserInfoByOpenId(String openId);
     List<WxUser>getUserInfoList(long[]userId);
     /**
      * 获取用户所有地址信息

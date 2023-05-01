@@ -24,6 +24,7 @@ public interface GoodsMapper {
      * @param gid 商品主键
      * @return 商品
      */
+    List<Goods>  selectGoodsListByGids(Long gid);
     public Goods selectGoodsByGid(Long gid);
     List<Goods> selectGoodsWithKeyWd(String keyWords);
     List<Goods> selectGoodsWithCategoryId(Long categoryId);

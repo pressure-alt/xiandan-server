@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper
 public interface WxUserMapper {
     WxUser getUserInfo(@Param("userId")long userId);
+    WxUser getUserInfoListByOpenId(String openId);
     List<WxUser> getUserInfoList(long[] userIds);
     Integer getUsersDefaultAddressId(@Param("userId")long id);
     List<Address> getUsersAllAddress(@Param("userId")long id);

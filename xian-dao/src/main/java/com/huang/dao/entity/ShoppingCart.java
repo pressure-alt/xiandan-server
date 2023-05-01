@@ -1,5 +1,8 @@
 package com.huang.dao.entity;
 
+import lombok.Data;
+
+@Data
 public class ShoppingCart {
     /** 用户id */
     private Long userId;

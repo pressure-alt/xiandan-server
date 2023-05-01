@@ -48,23 +48,24 @@ public class GoodsVo {
 
     private UserVo userVo;
 
-//    public void constructGoodsVo(Goods goods, WxUser user){
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy/MM/dd");
-//
-//        this.setId(goods.getGid());
-//        this.setTitle(goods.getGprofile());
-//        this.setImgList(JSON.parseArray(goods.getGiconPath()));
-//        this.setAddress(goods.getGlocation());
-//        this.setFineness(goods.getFineness());
-//        this.setCategoryId(goods.getCategoryId());
-//        this.setPrePrice(goods.getGprePrice());
-//        this.setStockNum(goods.getStockNum());
-//        this.setInfo(goods.getGdetails());
-//        this.setPrice(goods.getGprice());
-//        String t=simpleDateFormat.format(goods.getTime());
-//        this.setTime(t);
-//        this.userVo.setUserId(user.getUserId());
-//        this.userVo.setAvatarUrl(user.getAvatarUrl());
-//        this.userVo.setNickName(user.getNickName());
-//    }
+    public void constructGoodsVo(Goods goods, WxUser user){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy/MM/dd");
+
+        this.setId(goods.getGid());
+        this.setTitle(goods.getGprofile());
+        this.setImgList(JSON.parseArray(goods.getGiconPath()));
+        this.setAddress(goods.getGlocation());
+        this.setFineness(goods.getFineness());
+        this.setCategoryId(goods.getCategoryId());
+        this.setPrePrice(goods.getGprePrice());
+        this.setStockNum(goods.getStockNum());
+        this.setInfo(goods.getGdetails());
+        this.setPrice(goods.getGprice());
+        String t=simpleDateFormat.format(goods.getTime());
+        this.setTime(t);
+        this.userVo=new UserVo();
+        this.userVo.setUserId(user.getUserId());
+        this.userVo.setAvatarUrl(user.getAvatarUrl());
+        this.userVo.setNickName(user.getNickName());
+    }
 }

@@ -7,21 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 @Mapper
 public interface ShoppingCartMapper {
-    /**
-     * 查询购物车
-     *
-     * @param userId 购物车主键
-     * @return 购物车
-     */
-    public ShoppingCart selectShoppingCartByUserId(@Param("userId") Long userId);
 
     /**
      * 查询购物车列表
      *
-     * @param shoppingcart 购物车
+     * @param userId 用户id
      * @return 购物车集合
      */
-    public List<ShoppingCart> selectShoppingCartList(ShoppingCart shoppingcart);
+    public List<ShoppingCart> selectShoppingCartList(@Param("userId") Long userId);
 
     /**
      * 新增购物车

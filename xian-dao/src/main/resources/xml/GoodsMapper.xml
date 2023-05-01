@@ -43,13 +43,14 @@
         SELECT *
         FROM `goods`
         WHERE gprofile LIKE concat('%',#{keyWords},'%')
-
-
     </select>
     <select id="selectGoodsWithCategoryId" resultType="com.huang.dao.entity.Goods">
         SELECT *
         FROM `goods`
         WHERE category_id = '#{categoryId}'
+    </select>
+    <select id="selectGoodsListByGids" resultType="com.huang.dao.entity.Goods">
+
     </select>
     <update id="updateGoodsImages">
         UPDATE `goods`
@@ -65,36 +66,36 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
 
-        <!--        insert into goods-->
-        <!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
-        <!--            <if test="gprofile != null and gprofile != ''">gprofile,</if>-->
-        <!--            <if test="gprice != null">gprice,</if>-->
-        <!--            <if test="gprePrice != null">gpre_price,</if>-->
-        <!--            <if test="giconPath != null and giconPath != ''">gicon_path,</if>-->
-        <!--            <if test="gdetails != null and gdetails != ''">gdetails,</if>-->
-        <!--            <if test="ownerId != null">owner_id,</if>-->
-        <!--            <if test="glocation != null and glocation != ''">glocation,</if>-->
-        <!--            <if test="fineness != null and fineness != ''">fineness,</if>-->
-        <!--            <if test="stockNum != null">stock_num,</if>-->
-        <!--            <if test="categoryId != null">category_id,</if>-->
-        <!--            <if test="gstatus != null">gstatus,</if>-->
-        <!--            <if test="time != null">time,</if>-->
-        <!--        </trim>-->
-        <!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
-        <!--            <if test="gprofile != null and gprofile != ''">#{gprofile},</if>-->
-        <!--            <if test="gprice != null">#{gprice},</if>-->
-        <!--            <if test="gprePrice != null">#{gprePrice},</if>-->
-        <!--            <if test="giconPath != null and giconPath != ''">#{giconPath},</if>-->
-        <!--            <if test="gdetails != null and gdetails != ''">#{gdetails},</if>-->
-        <!--            <if test="ownerId != null">#{ownerId},</if>-->
-        <!--            <if test="glocation != null and glocation != ''">#{glocation},</if>-->
-        <!--            <if test="fineness != null and fineness != ''">#{fineness},</if>-->
-        <!--            <if test="stockNum != null">#{stockNum},</if>-->
-        <!--            <if test="categoryId != null">#{categoryId},</if>-->
-        <!--            <if test="gstatus != null">#{gstatus},</if>-->
-        <!--            <if test="time != null">#{time},</if>-->
+<!--                insert into goods-->
+<!--                <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--                    <if test="gprofile != null and gprofile != ''">gprofile,</if>-->
+<!--                    <if test="gprice != null">gprice,</if>-->
+<!--                    <if test="gprePrice != null">gpre_price,</if>-->
+<!--                    <if test="giconPath != null and giconPath != ''">gicon_path,</if>-->
+<!--                    <if test="gdetails != null and gdetails != ''">gdetails,</if>-->
+<!--                    <if test="ownerId != null">owner_id,</if>-->
+<!--                    <if test="glocation != null and glocation != ''">glocation,</if>-->
+<!--                    <if test="fineness != null and fineness != ''">fineness,</if>-->
+<!--                    <if test="stockNum != null">stock_num,</if>-->
+<!--                    <if test="categoryId != null">category_id,</if>-->
+<!--                    <if test="gstatus != null">gstatus</if>-->
 
-        <!--        </trim>-->
+<!--                </trim>-->
+<!--                <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--                    <if test="gprofile != null and gprofile != ''">#{gprofile},</if>-->
+<!--                    <if test="gprice != null">#{gprice},</if>-->
+<!--                    <if test="gprePrice != null">#{gprePrice},</if>-->
+<!--                    <if test="giconPath != null and giconPath != ''">#{giconPath},</if>-->
+<!--                    <if test="gdetails != null and gdetails != ''">#{gdetails},</if>-->
+<!--                    <if test="ownerId != null">#{ownerId},</if>-->
+<!--                    <if test="glocation != null and glocation != ''">#{glocation},</if>-->
+<!--                    <if test="fineness != null and fineness != ''">#{fineness},</if>-->
+<!--                    <if test="stockNum != null">#{stockNum},</if>-->
+<!--                    <if test="categoryId != null">#{categoryId},</if>-->
+<!--                    <if test="gstatus != null">#{gstatus}</if>-->
+
+
+<!--                </trim>-->
 
     </insert>
     <update id="updateGoods">

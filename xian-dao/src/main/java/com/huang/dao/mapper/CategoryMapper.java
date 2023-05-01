@@ -18,10 +18,10 @@ public interface CategoryMapper {
     /**
      * 查询商品分类列表
      *
-     * @param category 商品分类
+     *
      * @return 商品分类集合
      */
-    public List<Category> selectCategoryList(Category category);
+    public List<Category> selectCategoryList();
 
     /**
      * 新增商品分类

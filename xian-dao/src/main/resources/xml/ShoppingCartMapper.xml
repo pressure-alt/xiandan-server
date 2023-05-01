@@ -3,11 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huang.dao.mapper.ShoppingCartMapper">
-    <insert id="insertShoppingCart"></insert>
-    <update id="updateShoppingCart"></update>
-    <delete id="deleteShoppingCartByUserId"></delete>
-    <delete id="deleteShoppingCartByUserIds"></delete>
+    <insert id="insertShoppingCart">
+        INSERT INTO `shoppingcart`
+            VALUE (#{userId},#{gid},#{num})
+    </insert>
+    <update id="updateShoppingCart">
+        UPDATE `shoppingcart`
+        SET `num`=#{num}
+        WHERE `user_id`=#{userId} and `gid`=#{gid}
+    </update>
 
-    <select id="selectShoppingCartByUserId" resultType="com.huang.dao.entity.ShoppingCart"></select>
-    <select id="selectShoppingCartList" resultType="com.huang.dao.entity.ShoppingCart"></select>
+    <delete id="deleteShoppingCartByGid">
+        DELETE
+        FROM `shoppingcart`
+        WHERE `gid`=#{gid} AND `uer_id`=#{userId}
+    </delete>
+
+
+
+    <select id="selectShoppingCartList" resultType="com.huang.dao.entity.ShoppingCart">
+        SELECT *
+        FROM `shoppingcart`
+        WHERE `user_id`=#{userId}
+    </select>
+
 </mapper>

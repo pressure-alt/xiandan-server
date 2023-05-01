@@ -33,7 +33,7 @@ public interface OrderMapper {
      * @param order 订单
      * @return 结果
      */
-    public int insertOrder(Order order);
+    public Order insertOrder(Order order);
 
     /**
      * 修改订单

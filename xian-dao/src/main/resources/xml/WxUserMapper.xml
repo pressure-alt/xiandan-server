@@ -22,4 +22,9 @@
 
     </select>
     <select id="getUserInfoList" resultType="com.huang.dao.entity.WxUser"></select>
+    <select id="getUserInfoListByOpenId" resultType="com.huang.dao.entity.WxUser">
+        SELECT *
+        FROM `user`
+        WHERE open_id=#{openId}
+    </select>
 </mapper>

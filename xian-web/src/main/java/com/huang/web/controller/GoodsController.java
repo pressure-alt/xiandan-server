@@ -1,27 +1,24 @@
 package com.huang.web.controller;
 
-import com.alibaba.fastjson.JSON;
+
 import com.huang.biz.service.GoodsService;
 import com.huang.biz.service.UserService;
 import com.huang.dao.entity.Goods;
 import com.huang.dao.entity.WxUser;
 import com.huang.web.JsonResult;
 import com.huang.web.vo.GoodsVo;
-import com.huang.web.vo.UserVo;
-import jakarta.annotation.Resource;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+@Slf4j
 @RestController
 @ComponentScan("com.huang.biz.service.impl")
 @RequestMapping("/goods")
@@ -39,36 +36,22 @@ public class GoodsController {
         int param = page * pageSize;
         List<Goods> goodsList = goodsService.goodList(param, pageSize);
         List<GoodsVo> goodsVos = new ArrayList<>();
+        //将商品信息和卖家信息封装
         for (Goods goods : goodsList) {
             WxUser user = userService.getUserInfo(goods.getOwnerId());
             GoodsVo goodsVo = new GoodsVo();
-            UserVo userVo = new UserVo();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy/MM/dd");
-            goodsVo.setId(goods.getGid());
-            goodsVo.setTitle(goods.getGprofile());
-            goodsVo.setImgList(JSON.parseArray(goods.getGiconPath()));
-            goodsVo.setAddress(goods.getGlocation());
-            goodsVo.setFineness(goods.getFineness());
-            goodsVo.setCategoryId(goods.getCategoryId());
-            goodsVo.setPrePrice(goods.getGprePrice());
-            goodsVo.setStockNum(goods.getStockNum());
-            goodsVo.setInfo(goods.getGdetails());
-            goodsVo.setPrice(goods.getGprice());
-            goodsVo.setUserVo(userVo);
+            goodsVo.constructGoodsVo(goods,user);
             goodsVos.add(goodsVo);
-            String t=simpleDateFormat.format(goods.getTime());
-            goodsVo.setTime(t);
-            userVo.setUserId(user.getUserId());
-            userVo.setAvatarUrl(user.getAvatarUrl());
-            userVo.setNickName(user.getNickName());
         }
         return new JsonResult<>(200, "商品列表", goodsVos);
     }
     //上传商品
     @RequestMapping("/upload")
     public JsonResult uploadGoods(@RequestBody Goods goods) {
+        log.info(goods.toString());
         long goodsId = goodsService.insertGoods(goods);
         HashMap<String, Long> data = new HashMap<>();
+
         data.put("goodsId", goods.getGid());
         return new JsonResult<>(200, "上传成功", data);
     }
@@ -111,12 +94,28 @@ public class GoodsController {
     }
     //按商品关键字查找商品
     @PostMapping("/search-words")
-    public List<Goods> searchKw( String keyWords) {
-        return goodsService.searchGoodsKey(keyWords);
+    public JsonResult searchKw( String keyWords) {
+        List<Goods> goodsList = goodsService.searchGoodsKey(keyWords);
+        List<GoodsVo> goodsVos=new ArrayList<>();
+        for (Goods goods : goodsList) {
+            WxUser user = userService.getUserInfo(goods.getOwnerId());
+            GoodsVo goodsVo = new GoodsVo();
+            goodsVo.constructGoodsVo(goods,user);
+            goodsVos.add(goodsVo);
+        }
+        return  new JsonResult<>(200, "商品列表", goodsVos);
     }
     //按商品分类查找商品
     @PostMapping("/search-cid")
-    public List<Goods> searchCid(Long  categoryId) {
-        return goodsService.searchGoodsCategoryId(categoryId);
+    public JsonResult searchCid(Long  categoryId) {
+        List<Goods> goodsList = goodsService.searchGoodsCategoryId(categoryId);
+        List<GoodsVo> goodsVos=new ArrayList<>();
+        for (Goods goods : goodsList) {
+            WxUser user = userService.getUserInfo(goods.getOwnerId());
+            GoodsVo goodsVo = new GoodsVo();
+            goodsVo.constructGoodsVo(goods,user);
+            goodsVos.add(goodsVo);
+        }
+        return  new JsonResult<>(200, "商品列表", goodsVos);
     }
 }

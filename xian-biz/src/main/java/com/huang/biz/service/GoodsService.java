@@ -9,6 +9,10 @@ public interface GoodsService {
 
     List<Goods> goodList(int param, int pageSize);
 
+    List<Goods> getGoodsList(Long[] goodsIds);
+
+    Goods getGoods(Long goodsId);
+
     int insertGoods(Goods goods);
 
     int deleteGoods(long goodsId);

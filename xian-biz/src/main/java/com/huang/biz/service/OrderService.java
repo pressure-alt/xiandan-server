@@ -1,6 +1,8 @@
 package com.huang.biz.service;
 
-public interface OrderService {
+import com.huang.dao.entity.Order;
 
+public interface OrderService {
+Order placeOrder (Order order);
 
 }

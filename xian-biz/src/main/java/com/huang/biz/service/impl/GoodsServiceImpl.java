@@ -23,6 +23,16 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public List<Goods> getGoodsList(Long[] goodsIds) {
+        return null;
+    }
+
+    @Override
+    public Goods getGoods(Long goodsId) {
+        return goodsMapper.selectGoodsByGid(goodsId);
+    }
+
+    @Override
     public int  insertGoods(Goods goods) {
 
 

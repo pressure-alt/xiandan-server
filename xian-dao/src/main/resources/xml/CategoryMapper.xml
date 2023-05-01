@@ -3,11 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huang.dao.mapper.CategoryMapper">
-    <insert id="insertCategory"></insert>
-    <update id="updateCategory"></update>
-    <delete id="deleteCategoryByCategoryId"></delete>
-    <delete id="deleteCategoryByCategoryIds"></delete>
-
+    <insert id="insertCategory">
+        INSERT INTO `category`
+            value (#{categoryId},#{categoryName},#{categoryParentId},#{imagePath})
+    </insert>
+    <update id="updateCategory">
+        UPDATE `category`
+        SET `category_name`=#{categoryName},
+            `category_parent_id`=#{categoryParentId},
+            `image_path`=#{imagePath}
+        WHERE `category_id` = #{categoryId}
+    </update>
+    <delete id="deleteCategoryByCategoryId">
+        DELETE
+        FROM `category`
+        WHERE `category_id` = #{categoryId}
+    </delete>
+    <delete id="deleteCategoryByCategoryIds">
+        DELETE FROM `category` WHERE category_id IN
+        <foreach item="category_id" collection="array" open="(" separator="," close=")">
+            #{categoryId}
+        </foreach>
+    </delete>
     <select id="selectCategoryByCategoryId" resultType="com.huang.dao.entity.Category"></select>
-    <select id="selectCategoryList" resultType="com.huang.dao.entity.Category"></select>
+    <select id="selectCategoryList" resultType="com.huang.dao.entity.Category">
+        SELECT *
+        FROM `category`
+    </select>
 </mapper>
