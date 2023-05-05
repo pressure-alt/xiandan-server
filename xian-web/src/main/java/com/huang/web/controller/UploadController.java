@@ -55,7 +55,7 @@ public class UploadController {
             //返回文件名和url访问路径
             return response.set("code",200).set("message","文件上传成功").set("data",Dict.create()
                                                                             .set("fileName",fileName)
-                                                                            .set("filePath",DOMAIN+picUrl+md5FileName+"."+fileType));
+                                                                            .set("filePath",DOMAIN+picUrl+localFileName));
 
 
     }

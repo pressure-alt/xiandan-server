@@ -3,31 +3,96 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huang.dao.mapper.CategoryMapper">
-    <insert id="insertCategory">
-        INSERT INTO `category`
-            value (#{categoryId},#{categoryName},#{categoryParentId},#{imagePath})
+    <resultMap type="com.huang.dao.entity.Category" id="CategoryResult">
+        <result property="categoryId"    column="category_id"    />
+        <result property="categoryName"    column="category_name"    />
+        <result property="categoryParentId"    column="category_parent_id"    />
+        <result property="imagePath"    column="image_path"    />
+    </resultMap>
+
+    <sql id="selectCategoryVo">
+        select category_id, category_name, category_parent_id, image_path, create_time, update_time from category
+    </sql>
+
+    <select id="selectCategoryList" parameterType="com.huang.dao.entity.Category" resultMap="CategoryResult">
+        <include refid="selectCategoryVo"/>
+        <where>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="categoryParentId != null "> and category_parent_id = #{categoryParentId}</if>
+            <if test="imagePath != null  and imagePath != ''"> and image_path = #{imagePath}</if>
+        </where>
+    </select>
+
+    <select id="selectCategoryByCategoryId" parameterType="Long" resultMap="CategoryResult">
+        <include refid="selectCategoryVo"/>
+        where category_id = #{categoryId}
+    </select>
+
+    <insert id="insertCategory" parameterType="com.huang.dao.entity.Category" useGeneratedKeys="true" keyProperty="categoryId">
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryName != null and categoryName != ''">category_name,</if>
+            <if test="categoryParentId != null">category_parent_id,</if>
+            <if test="imagePath != null and imagePath != ''">image_path,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryName != null and categoryName != ''">#{categoryName},</if>
+            <if test="categoryParentId != null">#{categoryParentId},</if>
+            <if test="imagePath != null and imagePath != ''">#{imagePath},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
     </insert>
-    <update id="updateCategory">
-        UPDATE `category`
-        SET `category_name`=#{categoryName},
-            `category_parent_id`=#{categoryParentId},
-            `image_path`=#{imagePath}
-        WHERE `category_id` = #{categoryId}
+
+    <update id="updateCategory" parameterType="com.huang.dao.entity.Category">
+        update category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoryName != null and categoryName != ''">category_name = #{categoryName},</if>
+            <if test="categoryParentId != null">category_parent_id = #{categoryParentId},</if>
+            <if test="imagePath != null and imagePath != ''">image_path = #{imagePath},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where category_id = #{categoryId}
     </update>
-    <delete id="deleteCategoryByCategoryId">
-        DELETE
-        FROM `category`
-        WHERE `category_id` = #{categoryId}
+
+    <delete id="deleteCategoryByCategoryId" parameterType="Long">
+        delete from category where category_id = #{categoryId}
     </delete>
-    <delete id="deleteCategoryByCategoryIds">
-        DELETE FROM `category` WHERE category_id IN
-        <foreach item="category_id" collection="array" open="(" separator="," close=")">
+
+    <delete id="deleteCategoryByCategoryIds" parameterType="String">
+        delete from category where category_id in
+        <foreach item="categoryId" collection="array" open="(" separator="," close=")">
             #{categoryId}
         </foreach>
     </delete>
-    <select id="selectCategoryByCategoryId" resultType="com.huang.dao.entity.Category"></select>
-    <select id="selectCategoryList" resultType="com.huang.dao.entity.Category">
-        SELECT *
-        FROM `category`
-    </select>
+<!--    <insert id="insertCategory">-->
+<!--        INSERT INTO `category`-->
+<!--            value (#{categoryId},#{categoryName},#{categoryParentId},#{imagePath})-->
+<!--    </insert>-->
+<!--    <update id="updateCategory">-->
+<!--        UPDATE `category`-->
+<!--        SET `category_name`=#{categoryName},-->
+<!--            `category_parent_id`=#{categoryParentId},-->
+<!--            `image_path`=#{imagePath}-->
+<!--        WHERE `category_id` = #{categoryId}-->
+<!--    </update>-->
+<!--    <delete id="deleteCategoryByCategoryId">-->
+<!--        DELETE-->
+<!--        FROM `category`-->
+<!--        WHERE `category_id` = #{categoryId}-->
+<!--    </delete>-->
+<!--    <delete id="deleteCategoryByCategoryIds">-->
+<!--        DELETE FROM `category` WHERE category_id IN-->
+<!--        <foreach item="category_id" collection="array" open="(" separator="," close=")">-->
+<!--            #{categoryId}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+<!--    <select id="selectCategoryByCategoryId" resultType="com.huang.dao.entity.Category"></select>-->
+<!--    <select id="selectCategoryList" resultType="com.huang.dao.entity.Category">-->
+<!--        SELECT *-->
+<!--        FROM `category`-->
+<!--    </select>-->
 </mapper>

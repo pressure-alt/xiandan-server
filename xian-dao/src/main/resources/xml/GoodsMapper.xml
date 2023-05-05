@@ -17,6 +17,9 @@
         <result property="categoryId" column="category_id"/>
         <result property="gstatus" column="gstatus"/>
     </resultMap>
+    <sql id="selectGoodsVo">
+    select gid, gprofile, gprice, gpre_price, gicon_path, gdetails, owner_id, glocation, fineness, stock_num, category_id, gstatus, time from goods
+</sql>
     <select id="getRandomGoods" resultMap="getRandomGoods">
         SELECT *
         FROM `goods`
@@ -29,10 +32,25 @@
         FROM `goods`
         WHERE gid = #{gid}
     </select>
-    <select id="selectGoodsList" resultType="com.huang.dao.entity.Goods">
-        SELECT *
-        FROM `goods`
 
+
+
+    <select id="selectGoodsList" parameterType="com.huang.dao.entity.Goods" resultMap="getRandomGoods">
+        <include refid="selectGoodsVo"/>
+        <where>
+            <if test="gprofile != null  and gprofile != ''"> and gprofile = #{gprofile}</if>
+            <if test="gprice != null "> and gprice = #{gprice}</if>
+            <if test="gprePrice != null "> and gpre_price = #{gprePrice}</if>
+            <if test="giconPath != null  and giconPath != ''"> and gicon_path = #{giconPath}</if>
+            <if test="gdetails != null  and gdetails != ''"> and gdetails = #{gdetails}</if>
+            <if test="ownerId != null "> and owner_id = #{ownerId}</if>
+            <if test="glocation != null  and glocation != ''"> and glocation = #{glocation}</if>
+            <if test="fineness != null  and fineness != ''"> and fineness = #{fineness}</if>
+            <if test="stockNum != null "> and stock_num = #{stockNum}</if>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="gstatus != null "> and gstatus = #{gstatus}</if>
+            <if test="time != null "> and time = #{time}</if>
+        </where>
     </select>
     <select id="selectGoodsByOwnerId" resultType="com.huang.dao.entity.Goods">
         SELECT *

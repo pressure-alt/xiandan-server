@@ -1,16 +1,90 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.huang.dao.mapper.AddressMapper" >
-    <insert id="insertAddress"></insert>
-    <update id="updateAddress"></update>
-    <delete id="deleteAddressByAddressId"></delete>
-    <delete id="deleteAddressByAddressIds"></delete>
+    <resultMap type="com.huang.dao.entity.Address" id="AddressResult">
+        <result property="addressId"    column="address_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="district"    column="district"    />
+        <result property="street"    column="street"    />
+        <result property="name"    column="name"    />
+        <result property="tel"    column="tel"    />
+    </resultMap>
 
+    <sql id="selectAddressVo">
+        select address_id, user_id, province, city, district, street, name, tel from address
+    </sql>
+
+    <select id="selectAddressList" parameterType="com.huang.dao.entity.Address" resultMap="AddressResult">
+        <include refid="selectAddressVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="district != null  and district != ''"> and district = #{district}</if>
+            <if test="street != null  and street != ''"> and street = #{street}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="tel != null "> and tel = #{tel}</if>
+        </where>
+    </select>
+
+    <select id="selectAddressByAddressId" parameterType="Long" resultMap="AddressResult">
+        <include refid="selectAddressVo"/>
+        where address_id = #{addressId}
+    </select>
+
+    <insert id="insertAddress" parameterType="com.huang.dao.entity.Address">
+        insert into address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="addressId != null">address_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="province != null and province != ''">province,</if>
+            <if test="city != null and city != ''">city,</if>
+            <if test="district != null and district != ''">district,</if>
+            <if test="street != null and street != ''">street,</if>
+            <if test="name != null">name,</if>
+            <if test="tel != null">tel,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="addressId != null">#{addressId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="province != null and province != ''">#{province},</if>
+            <if test="city != null and city != ''">#{city},</if>
+            <if test="district != null and district != ''">#{district},</if>
+            <if test="street != null and street != ''">#{street},</if>
+            <if test="name != null">#{name},</if>
+            <if test="tel != null">#{tel},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAddress" parameterType="com.huang.dao.entity.Address">
+        update address
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="province != null and province != ''">province = #{province},</if>
+            <if test="city != null and city != ''">city = #{city},</if>
+            <if test="district != null and district != ''">district = #{district},</if>
+            <if test="street != null and street != ''">street = #{street},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="tel != null">tel = #{tel},</if>
+        </trim>
+        where address_id = #{addressId}
+    </update>
+
+    <delete id="deleteAddressByAddressId" parameterType="Long">
+        delete from address where address_id = #{addressId}
+    </delete>
+
+    <delete id="deleteAddressByAddressIds" parameterType="String">
+        delete from address where address_id in
+        <foreach item="addressId" collection="array" open="(" separator="," close=")">
+            #{addressId}
+        </foreach>
+    </delete>
     <select id="getAllAddressByUserId" resultType="com.huang.dao.entity.Address">
         select *
         from `address`
         where user_id=#{userId}
     </select>
-    <select id="selectAddressList" resultType="com.huang.dao.entity.Address"></select>
-    <select id="selectAddressByAddressId" resultType="com.huang.dao.entity.Address"></select>
-</mapper>
+   </mapper>

@@ -59,7 +59,7 @@ public interface GoodsMapper {
      * @param gid 商品主键
      * @return 结果
      */
-    public int deleteGoodsByGid(@Param("goodsId") Long gid);
+    int deleteGoodsByGid(@Param("goodsId") Long gid);
 
     /**
      * 批量删除商品
@@ -67,6 +67,6 @@ public interface GoodsMapper {
      * @param gids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteGoodsByGids(String[] gids);
+    public int deleteGoodsByGids(Long[] gids);
 
 }

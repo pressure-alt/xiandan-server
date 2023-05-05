@@ -32,19 +32,5 @@ public interface ShoppingCartMapper {
      */
     public int updateShoppingCart(ShoppingCart shoppingcart);
 
-    /**
-     * 删除购物车
-     *
-     * @param userId 购物车主键
-     * @return 结果
-     */
-    public int deleteShoppingCartByUserId(Long userId);
 
-    /**
-     * 批量删除购物车
-     *
-     * @param userIds 需要删除的数据主键集合
-     * @return 结果
-     */
-    public int deleteShoppingCartByUserIds(String[] userIds);
 }

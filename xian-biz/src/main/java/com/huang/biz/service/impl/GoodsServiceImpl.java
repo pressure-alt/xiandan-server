@@ -22,10 +22,7 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.getRandomGoods(param,pageSize);
     }
 
-    @Override
-    public List<Goods> getGoodsList(Long[] goodsIds) {
-        return null;
-    }
+
 
     @Override
     public Goods getGoods(Long goodsId) {
@@ -47,8 +44,28 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public Goods selectGoodsByGid(Long gid) {
+        return goodsMapper.selectGoodsByGid(gid);
+    }
+
+    @Override
+    public List<Goods> selectGoodsList(Goods goods) {
+        return goodsMapper.selectGoodsList(goods);
+    }
+
+    @Override
     public int updateGoods(Goods goods) {
         return goodsMapper.updateGoods(goods);
+    }
+
+    @Override
+    public int deleteGoodsByGids(Long[] gids) {
+        return goodsMapper.deleteGoodsByGids(gids);
+    }
+
+    @Override
+    public int deleteGoodsByGid(Long gid) {
+        return goodsMapper.deleteGoodsByGid(gid);
     }
 
     @Override
