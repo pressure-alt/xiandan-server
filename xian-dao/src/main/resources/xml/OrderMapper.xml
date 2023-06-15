@@ -3,10 +3,42 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huang.dao.mapper.OrderMapper">
-    <insert id="insertOrder"></insert>
+    <insert id="insertOrder">
+        insert into orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sellerId != null">seller_id,</if>
+            <if test="buyerId != null">buyer_id,</if>
+            <if test="gid != null">gid,</if>
+            <if test="orderTime != null">order_time,</if>
+            <if test="price != null">price,</if>
+            <if test="num != null">num,</if>
+            <if test="orderStatus != null">order_status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sellerId != null">#{sellerId},</if>
+            <if test="buyerId != null">#{buyerId},</if>
+            <if test="gid != null">#{gid},</if>
+            <if test="orderTime != null">#{orderTime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="num != null">#{num},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+        </trim>
+    </insert>
     <update id="setDeliveryNumber"></update>
-    <update id="updateOrder"></update>
-    <delete id="deleteOrderByOrderId"></delete>
+    <update id="updateOrder">
+        update orders
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sellerId != null">seller_id = #{sellerId},</if>
+            <if test="buyerId != null">buyer_id = #{buyerId},</if>
+            <if test="gid != null">gid = #{gid},</if>
+            <if test="orderTime != null">order_time = #{orderTime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+    <delete id="deleteOrderByOrderId"> delete from orders where order_id = #{orderId}</delete>
     <delete id="deleteOrderByOrderIds"></delete>
     <select id="getOrderListByUserId" resultType="com.huang.dao.entity.Order">
     select *

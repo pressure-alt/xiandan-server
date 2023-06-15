@@ -14,12 +14,17 @@ server:
       charset: utf-8
       force: true
       enabled: true
-#mybatis??
-mybatis:
-  type-aliases-package: com.huang.entity
-  mapper-locations: classpath:xml/*.xml
+#mybatis
+mybatis-plus:
+  type-aliases-package: com.huang.*.entity
+  mapper-locations: classpath*:xml/*.xml
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      update-strategy: not_null
+
 #xiandan程序配置
 xiandan:
   domain-name: http://localhost:8088

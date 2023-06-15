@@ -59,7 +59,7 @@ public class GoodsController {
     }
 
     //更新商品
-    @RequestMapping("/update")
+    @PutMapping("/update")
     public JsonResult updateGoods(@RequestBody Goods goods) {
         long flag = goodsService.updateGoods(goods);
         return new JsonResult<>(200, "更新成功", flag);
@@ -137,5 +137,6 @@ public class GoodsController {
     public JsonResult update(Goods goods) {
         return new JsonResult<>(goodsService.updateGoods(goods));
     }
+
 
 }

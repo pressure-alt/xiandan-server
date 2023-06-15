@@ -2,12 +2,11 @@ package com.huang.web.controller;
 
 import com.huang.biz.service.UserService;
 import com.huang.dao.entity.Address;
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController

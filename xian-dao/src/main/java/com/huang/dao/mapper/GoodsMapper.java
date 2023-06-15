@@ -3,8 +3,6 @@ package com.huang.dao.mapper;
 import com.huang.dao.entity.Goods;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-
 import java.util.List;
 
 @Mapper
@@ -15,7 +13,7 @@ public interface GoodsMapper {
      * @param param
      * @return
      */
-    List<Goods>getRandomGoods(int param,int pageSize);
+    List<Goods>getRandomGoods(@Param("param") int param,@Param("pageSize") int pageSize);
 
     List<Goods>selectGoodsByOwnerId(long ownerId);
     /**

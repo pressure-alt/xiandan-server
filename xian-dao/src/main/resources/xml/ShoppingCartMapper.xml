@@ -22,9 +22,9 @@
 
 
 
-    <select id="selectShoppingCartList" resultType="com.huang.dao.entity.ShoppingCart">
-        SELECT *
-        FROM `shoppingcart`
+    <select id="selectShoppingCartList" resultType="com.huang.dao.entity.ShoppingCartVo" >
+        SELECT s.user_id userId,s.gid id,s.num quantity, g.gicon_path imgList, g.gprofile title,g.stock_num stockNum,g.gprice price
+        FROM shoppingcart s left join goods g on s.gid = g.gid
         WHERE `user_id`=#{userId}
     </select>
 

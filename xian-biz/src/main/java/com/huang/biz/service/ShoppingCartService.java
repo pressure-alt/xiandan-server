@@ -1,11 +1,13 @@
 package com.huang.biz.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.huang.dao.entity.ShoppingCart;
+import com.huang.dao.entity.ShoppingCartVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface ShoppingCartService {
+public interface ShoppingCartService extends IService<ShoppingCart> {
     /**
      * 查询购物车
      *
@@ -20,7 +22,7 @@ public interface ShoppingCartService {
      * @param userId 用户id
      * @return 购物车集合
      */
-    public List<ShoppingCart> selectShoppingCartList(@Param("userId") Long userId);
+    public List<ShoppingCartVo> selectShoppingCartList(@Param("userId") Long userId);
 
     /**
      * 新增购物车

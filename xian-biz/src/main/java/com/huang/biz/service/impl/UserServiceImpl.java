@@ -5,9 +5,7 @@ import com.huang.dao.entity.Address;
 import com.huang.dao.entity.WxUser;
 import com.huang.dao.mapper.AddressMapper;
 import com.huang.dao.mapper.WxUserMapper;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

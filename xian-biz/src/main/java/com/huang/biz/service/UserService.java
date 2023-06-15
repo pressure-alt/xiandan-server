@@ -2,8 +2,6 @@ package com.huang.biz.service;
 
 import com.huang.dao.entity.Address;
 import com.huang.dao.entity.WxUser;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

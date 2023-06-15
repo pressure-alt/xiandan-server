@@ -1,11 +1,15 @@
 package com.huang.dao.entity;
 
-import jdk.jfr.Unsigned;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName("user")
 public class WxUser {
-
+    @TableId(type=IdType.AUTO)
     /** 用户id */
     private Long userId;
 

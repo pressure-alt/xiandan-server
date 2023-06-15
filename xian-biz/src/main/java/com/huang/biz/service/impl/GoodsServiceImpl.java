@@ -3,10 +3,7 @@ package com.huang.biz.service.impl;
 import com.huang.biz.service.GoodsService;
 import com.huang.dao.entity.Goods;
 import com.huang.dao.mapper.GoodsMapper;
-import jakarta.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

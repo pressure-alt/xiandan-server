@@ -1,20 +1,24 @@
 package com.huang.biz.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.huang.biz.service.ShoppingCartService;
 import com.huang.dao.entity.ShoppingCart;
+import com.huang.dao.entity.ShoppingCartVo;
 import com.huang.dao.mapper.GoodsMapper;
 import com.huang.dao.mapper.ShoppingCartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class ShoppingCartServiceImpl implements ShoppingCartService {
-    @Autowired
+public class ShoppingCartServiceImpl extends ServiceImpl<ShoppingCartMapper,ShoppingCart> implements ShoppingCartService {
+    @Resource
     ShoppingCartMapper shoppingCartMapper;
-    @Autowired
+    @Resource
     GoodsMapper goodsMapper;
+
     @Override
     public ShoppingCart selectShoppingCartByUserId(Long userId) {
 
@@ -22,13 +26,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public List<ShoppingCart> selectShoppingCartList(Long userId) {
+    public List<ShoppingCartVo> selectShoppingCartList(Long userId) {
         return shoppingCartMapper.selectShoppingCartList(userId);
     }
 
     @Override
     public int insertShoppingCart(ShoppingCart shoppingcart) {
-        return 0;
+
+
+        return shoppingCartMapper.insertShoppingCart(shoppingcart);
     }
 
     @Override

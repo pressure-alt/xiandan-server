@@ -1,8 +1,10 @@
 package com.huang.dao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName("order_delivery_details")
 public class OrderDeliveryDetail {
     /** 订单id */
     private Long orderId;

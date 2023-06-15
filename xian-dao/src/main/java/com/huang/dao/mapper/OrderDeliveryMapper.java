@@ -13,7 +13,7 @@ public interface OrderDeliveryMapper {
      * @param orderId 商品物流信息主键
      * @return 商品物流信息
      */
-    public OrderDeliveryDetail selectOrderDeliveryDetailByOrderId(Long orderId);
+//    public OrderDeliveryDetail selectOrderDeliveryDetailByOrderId(Long orderId);
 
     /**
      * 查询商品物流信息列表
